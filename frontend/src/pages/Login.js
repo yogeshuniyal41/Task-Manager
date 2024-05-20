@@ -45,7 +45,7 @@ export const Login = () => {
     <div>
       <Auth />
 
-      <div className="w-[328px] h-[22px] mt-[150px] ml-[660px] opacity-60 font-openSans  text-3xl leading-22 tracking-tighter text-center text-black absolute">
+      <div className="w-[328px] h-[22px] mt-[150px] ml-[700px] opacity-60 font-openSans  text-3xl leading-22 tracking-tighter text-center text-black absolute">
         Enter Credentials to Login
       </div>
       <input
@@ -63,13 +63,13 @@ export const Login = () => {
       />
       {errors.password && <div>{errors.password.message}</div>}
       <div className="w-[20px] h-[14.29px] mt-[624px] ml-[1049px] absolute text-black">Show</div>
-      <div
-        className="w-[450px] h-[54px] mt-[734px] ml-[639px] absolute bg-blue-500 text-white text-center pt-[25px] font-openSans"
+      <button
+        className="w-[450px] h-[54px] mt-[700px] ml-[639px] absolute bg-blue-500 text-white text-center pt-[25px] font-openSans"
         onClick={handleSubmit(handleLogin)}
       >
         Sign In
-      </div>
-      <div className="w-[57px] h-[18px] mt-[832px] ml-[839px] absolute z-10">
+      </button>
+      <div className="w-[57px] h-[18px] mt-[800px] ml-[839px] align-middle content-center text-center items-center absolute z-10 hover:text-blue-700 hover:bg-blue-300">
         <Link to="/signup">Sign Up</Link>
       </div>
     </div>
