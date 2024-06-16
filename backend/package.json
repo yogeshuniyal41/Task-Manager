@@ -1,68 +1,29 @@
 {
-  
   "name": "backend",
-  
   "version": "1.0.0",
-  
   "type": "module",
-  
   "description": "",
-  
-  "main": "index.js",
-  
+  "main": "index.mjs",
   "scripts": {
-  
-    
-  "dev": "nodemon -r esm server.js",
-  
-    
-  "test": "echo \"Error: no test specified\" && exit 1",
-
-  "start":"node index.js"
-  
+    "dev": "nodemon -r esm index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.mjs"
   },
-  
   "keywords": [],
-  
   "author": "",
-  
   "license": "ISC",
-  
   "dependencies": {
-  
-    
-  "bcrypt": "^5.1.1",
-  
-    
-  "cors": "^2.8.5",
-  
-    
-  "dotenv": "^16.4.5",
-  
-    
-  "esm": "^3.2.25",
-  
-    
-  "express": "^4.19.2",
-  
-    
-  "jsonwebtoken": "^9.0.2",
-  
-    
-  "mongoose": "^8.4.0",
-  
-    
-  "node-cron": "^3.0.3",
-  
-    
-  "passport-jwt": "^4.0.1"
-  
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "esm": "^3.2.25",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.0",
+    "node-cron": "^3.0.3",
+    "passport-jwt": "^4.0.1"
   },
-  
   "devDependencies": {
-  
-    
-  "nodemon": "^3.1.0"
-  
+    "nodemon": "^3.1.0"
   }
 }
