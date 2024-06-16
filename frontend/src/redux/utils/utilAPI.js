@@ -1,5 +1,6 @@
 // apiUtils.js
 import { getAccessToken, getRefreshToken, setAccessToken , setRefreshToken } from './utils';
+import {BASE_URL} from '../baseurl'
 
 // Function to make an API request with the access token in the header
 export async function apiRequest(url, options = {}) {
@@ -35,7 +36,7 @@ export async function apiRequest(url, options = {}) {
 
 // Function to refresh the access token using the refresh token
 async function refreshAccessToken(refreshToken) {
-    const response = await fetch('http://localhost:3000/refresh', {
+    const response = await fetch(`${BASE_URL}refresh`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

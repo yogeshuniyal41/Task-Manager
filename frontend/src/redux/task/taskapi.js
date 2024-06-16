@@ -1,16 +1,16 @@
 // Import the apiRequest function
 import { useSelector } from 'react-redux';
 import { apiRequest } from '../utils/utilAPI';
+import {BASE_URL } from '../baseurl'
 
 
-
-
+console.log(BASE_URL)
 
 // TASK APIs
 export const fetchAllTasks = async (userId) => {
     try {
        
-        const response = await apiRequest(`http://localhost:3000/tasks?email=${userId}`, {
+        const response = await apiRequest(`${BASE_URL}tasks?email=${userId}`, {
             method: 'GET',
 
         });
@@ -30,7 +30,7 @@ export const fetchAllTasks = async (userId) => {
 export const updateTask = async ( taskIds, status) => {
     
     try {
-        const response = await apiRequest(`http://localhost:3000/task/update/status/${status}`, {
+        const response = await apiRequest(`${BASE_URL}task/update/status/${status}`, {
             method: 'PUT',
             body: JSON.stringify(taskIds),
             headers: {
@@ -51,7 +51,7 @@ export const updateTask = async ( taskIds, status) => {
 export const updateBody = async ( taskId, taskBody) => {
     
     try {
-        const response = await apiRequest(`http://localhost:3000/task/update/body/${taskId}`, {
+        const response = await apiRequest(`${BASE_URL}task/update/body/${taskId}`, {
             method: 'PUT',
             body: JSON.stringify(taskBody),
             headers: {
@@ -73,7 +73,7 @@ export const updateBody = async ( taskId, taskBody) => {
 export const addTask = async ( task) => {
     try {
         // console.log(task)
-        const response = await apiRequest(`http://localhost:3000/task/add`, {
+        const response = await apiRequest(`${BASE_URL}task/add`, {
             method: 'POST',
             body: JSON.stringify(task),
             headers: {
@@ -93,7 +93,7 @@ export const addTask = async ( task) => {
 
 export const deleteTask = async (id) => {
     try {
-        const response = await apiRequest(`http://localhost:3000/task/${id}`, {
+        const response = await apiRequest(`${BASE_URL}task/${id}`, {
             method: 'DELETE',
         });
         if (!response.ok) {

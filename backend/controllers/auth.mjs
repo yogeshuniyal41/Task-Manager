@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
-import { ACCESS_SECRET} from '../config/index.mjs';
+import dotenv from 'dotenv';
+dotenv.config();
+let ACCESS_SECRET = process.env.ACCESS_SECRET;
 
 const auth= async(req,res,next)=>{
     

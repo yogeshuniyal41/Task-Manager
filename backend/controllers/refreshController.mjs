@@ -31,7 +31,11 @@
 // export default refreshController
 import jwt from 'jsonwebtoken';
 import { refreshToken } from '../models/index.mjs';
-import { ACCESS_SECRET, REFRESH_SECRET } from '../config/index.mjs';
+import dotenv from 'dotenv';
+dotenv.config();
+let ACCESS_SECRET = process.env.ACCESS_SECRET;
+let REFRESH_SECRET= process.env.REFRESH_SECRET;
+
 
 const refreshController = async (req, res) => {
     const token = req.body.token;

@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/index.mjs'
 import { refreshToken } from '../models/index.mjs';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const userController = {
     async login(req, res) {

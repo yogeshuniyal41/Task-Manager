@@ -1,10 +1,10 @@
 
-
+import {BASE_URL} from '../baseurl'
 
 // userAPI.js
 export const loginUser = async (credentials) => {
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch(`${BASE_URL}login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const loginUser = async (credentials) => {
 
 export const signupUser = async (userDetails) => {
     try {
-        const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch(`${BASE_URL}signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export const logoutUser = async(token)=>{
             }
 
     try {
-        let response= await fetch('http://localhost:3000/logout',{
+        let response= await fetch(`${BASE_URL}logout`,{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',

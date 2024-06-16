@@ -1,15 +1,15 @@
 import express, { json } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import cron from 'node-cron';
-import { Task } from './models/index.mjs'
+import dotenv from 'dotenv'
 
 import {  userRouter,taskRouter, refreshTokenRouter } from './routes/index.mjs';
-import { DB_URL, PORT } from './config/index.mjs';
-// import  './utils/cornJob.mjs';
+
+dotenv.config()
 
 const app = express();
-
+ let DB_URL = process.env.DB_URL;
+ let PORT = process.env.PORT;
 
 mongoose.connect(DB_URL)
     .then(() => console.log("Database connected"))
@@ -27,21 +27,21 @@ app.use(refreshTokenRouter)
   
 
 // code to update status of Tasks
-cron.schedule('* * * * *', async () => {
-    try {
+// cron.schedule('* * * * *', async () => {
+//     try {
       
-      const now = new Date();
-      const result = await Task.updateMany(
-        { deadline: { $lt: now }, status: { $nin: ['backlog','complete']  } },
-        { $set: { status: 'backlog' } }
-      );
-      if(result!==undefined)
-        {console.log(`Backlog status updated for ${result.nModified} overdue tasks`);}
-    } catch (error) {
-      console.error('Error updating backlog status:', error);
-    }
-  });
+//       const now = new Date();
+//       const result = await Task.updateMany(
+//         { deadline: { $lt: now }, status: { $nin: ['backlog','complete']  } },
+//         { $set: { status: 'backlog' } }
+//       );
+//       if(result!==undefined)
+//         {console.log(`Backlog status updated for ${result.nModified} overdue tasks`);}
+//     } catch (error) {
+//       console.error('Error updating backlog status:', error);
+//     }
+//   });
 
-app.listen(3000 , () => {
+app.listen(PORT , () => {
     console.log(`Server is running on port ${PORT}`);
 });
