@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon -r esm index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.mjs"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
