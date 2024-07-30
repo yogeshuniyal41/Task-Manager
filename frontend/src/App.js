@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from './pages/Dashboard';
 import Auth from "./pages/Auth";
-import Test from "./pages/Test";
+import Profile from "./pages/Profile";
 import {   getUser } from "./redux/utils/utils";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           {/* Explicit dashboard route */}
           <Route path="/dashboard" element= {<Dashboard />} />
           {/* Profile route */}
-          <Route path="/profile" element={ <Test />} />
+          <Route path="/profile" element={ <Profile />} />
           {/* Add other routes here as needed */}
         </Routes>
       </BrowserRouter>

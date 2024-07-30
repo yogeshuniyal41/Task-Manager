@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTaskAsync } from '../redux/task/taskSlice';
 import { useNavigate } from 'react-router-dom';
 
-const Test = () => {
+const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = getUser();
@@ -54,4 +54,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default Profile;
