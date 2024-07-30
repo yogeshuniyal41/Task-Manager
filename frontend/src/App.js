@@ -1,34 +1,27 @@
-
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-
-import { Login} from "./pages/Login";
-import Dashboard from './pages/Dashboard'
-import { Signup } from "./pages/Signup";
-
-
-
+import Dashboard from './pages/Dashboard';
+import Auth from "./pages/Auth";
+import Test from "./pages/Test";
+import {   getUser } from "./redux/utils/utils";
 
 function App() {
+  const user = getUser();  // Retrieve the user from some utility function
+  
   
   return (
-    <div className="App" >
-      
-     <BrowserRouter>
-     
-            <Routes>
-                <Route path="/" element={<Login/>} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/signup" element={<Signup/>} />
-                {/* Add other routes here */}
-                
-            </Routes>
-        
-     </BrowserRouter>
-     
-      
-      
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          
+          {/* Root path: Render Dashboard if user is not null, otherwise render Auth */}
+          <Route path="/" element={ <Auth />} />
+          {/* Explicit dashboard route */}
+          <Route path="/dashboard" element= {<Dashboard />} />
+          {/* Profile route */}
+          <Route path="/profile" element={ <Test />} />
+          {/* Add other routes here as needed */}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

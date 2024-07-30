@@ -59,7 +59,7 @@ export const updateBodyAsync = createAsyncThunk(
     async({taskId , taskBody})=>{
        
         const data = await updateBody(taskId,taskBody);
-        console.log(data)
+        
         return data;
 
     }
@@ -160,8 +160,7 @@ const tasksSlice = createSlice({
                     state.data[index] = action.payload.task;
                     
                 }
-                console.log(index)
-                console.log(state.data[index])
+               
             
             })
             .addCase(updateBodyAsync.rejected,(state,action)=>{

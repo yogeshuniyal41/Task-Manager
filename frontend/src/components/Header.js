@@ -1,54 +1,51 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRefreshToken } from '../redux/utils/utils';
-import { logoutAsync  } from '../redux/user/UserSlice';
-
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../redux/task/taskSlice';
-
+import { getUser } from '../redux/utils/utils';
+import { useNavigate, useLocation } from 'react-router-dom';
+import CustomDropdown from './CustomDropDown';
 
 const Header = (props) => {
-  
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  
-  
+  const location = useLocation();
+  const user = getUser();
+  const tasks = useSelector((state) => state.task.data);
 
- 
+  const pendingTasks = useMemo(() => tasks.filter((task) => task.status === 'pending').length, [tasks]);
+  const backlogTasks = useMemo(() => tasks.filter((task) => task.status === 'backlog').length, [tasks]);
 
-  const handleLogout =async (event) => {
-    // Handle logout functionality here
-    // For example: dispatch a logout action or clear user session
-    event.preventDefault();
-     
-      let token=getRefreshToken();
-    const resultAction= await dispatch(logoutAsync({'token':token}));
-    
-    if(logoutAsync.fulfilled.match(resultAction))
-      {
-        dispatch(logout())
-          navigate('/');
-      }
-   
-  };
+  const dropdownOptions = useMemo(() => (
+    location.pathname === '/profile'
+      ? [
+          { value: 'Dashboard', label: 'Dashboard', className: 'text-blue-500' },
+          { value: 'Logout', label: 'Logout', className: 'text-red-500' },
+        ]
+      : [
+          { value: 'Profile', label: 'Profile', className: 'text-blue-500' },
+          { value: 'Logout', label: 'Logout', className: 'text-red-500' },
+        ]
+  ), [location.pathname]);
 
   return (
-    <div className="h-50 ml-4 mr-4 bg-transparent hover:transparent rounded-xl">
-      <div className=''>
-        <div className='mx-5 mt-15 w-[450px] text-7xl  inline-block '>Task Manager</div>
-        <div className='mx-5 text-3xl inline-block '>Total Tasks</div>
-        <div className='inline-block' >{props.children}</div>
-        
-        
-          {user && (
-            <button className=" top-full bg-transparent text-red-400 px-3 py-1 float-right rounded-lg mt-1 transition-all duration-1000 text-3xl" onClick={handleLogout}>
-              Logout
-            </button>
-          )}
-       
-      </div>
-      
+    <div className="h-44 max-w-full flex-shrink flex-row shadow-sm rounded-xl mx-4 shadow-black">
+      <div className="mx-10 my-1 w-[450px] text-7xl inline-block">Task Manager</div>
+      {pendingTasks > 0 && (
+        <div className="mx-5 text-3xl inline-block flex-row">
+          Pending:
+          <div className="bg-yellow-500 flex-row inline-block rounded-full px-3 mt-3 font-semibold w-9 h-9">
+            {pendingTasks}
+          </div>
+        </div>
+      )}
+      {backlogTasks > 0 && (
+        <div className="mx-5 text-3xl inline-block flex-row">
+          Backlog:
+          <div className="bg-red-500 flex-row inline-block rounded-full px-3 mt-3 font-semibold">
+            {backlogTasks}
+          </div>
+        </div>
+      )}
+      <div className="inline-block">{props.children}</div>
+      {user && <CustomDropdown className="inline-block" options={dropdownOptions} />}
     </div>
   );
 };

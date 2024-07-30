@@ -31,31 +31,43 @@ const TaskList = () => {
     const handleStatusChange = async () => {
         if (selectedTasks.length > 0 && newStatus) {
             const tasksToUpdate = selectedTasks.filter(taskId => {
-                const task = tasks.find(t => t._id === taskId);
-                return task && task.status !== 'completed';
+                const task = tasks.find(t => (t._id === taskId && t.status!=='complete'));
+                return task ;
             });
 
             if (tasksToUpdate.length === 0) {
                 toast.info("No tasks to update or all selected tasks are already completed");
+                setNewStatus("")
                 return;
             }
 
-            try {
+            const isConfirmed = window.confirm("Are you sure you want to update the status of selected task");
+            if(isConfirmed)
+            { try {
                 await dispatch(updateTaskAsync({
                     taskIds: tasksToUpdate,
                     status: newStatus,
                 }));
-                toast.success("Updated");
+                if(updateTaskAsync && toast.success("Updated")){}
                 setSelectedTasks([]);
+                setNewStatus("")
+                
             } catch (error) {
                 console.error('Error updating tasks status:', error);
             }
+        }
+        else {
+
+        }
+           
         }
     };
 
     const handleUpdateTask = async (formData) => {
         const { taskName, taskDescription, taskDeadline } = formData;
-        try {
+        const isConfirmed = window.confirm("Are you sure you want to update the status of selected task");
+        if(isConfirmed)
+        { try {
             await dispatch(updateBodyAsync({
                 taskId: editingTaskId,
                 taskBody: {
@@ -70,7 +82,8 @@ const TaskList = () => {
             setEditingTaskId(null);
         } catch (error) {
             console.error('Error updating task:', error);
-        }
+        }}
+       
     };
 
     const handleEditButtonClick = (task) => {
@@ -83,9 +96,17 @@ const TaskList = () => {
     };
 
     const deleteTask = async (id) => {
-        dispatch(deleteTaskAsync(id));
-        // dispatch(fetchAllTaskAsync(userId));
-        toast.error("Task Deleted");
+        const isConfirmed = window.confirm("Are you sure you want to delete this task");
+        if(isConfirmed)
+        {
+            try {
+                dispatch(deleteTaskAsync(id));
+                if(deleteTaskAsync.fulfilled && toast.error("Task Deleted")){}
+            } catch (error) {
+                console.log(error)
+            }
+        }
+       
     };
 
     const handleCancelEdit = () => {
@@ -157,7 +178,7 @@ const TaskList = () => {
                                     )}
                                 </td>
                                 
-                                <td className={`border py-2 px-2 ${getStatusColor(task.status)}`}>{task.status}</td>
+                                <td className={`border py-2 px-2 font-bold  ${getStatusColor(task.status)}`}>{task.status}</td>
                                 <td className="border py-2 px-2">
                                     {editingTaskId === task._id ? (
                                         <>
@@ -205,12 +226,13 @@ const TaskList = () => {
                                     className="mr-2 px-4 py-2 border rounded bg-transparent"
                                 >
                                     <option value="">Select Status</option>
-                                    <option value="pending">Pending</option>
-                                    <option value="started">Started</option>
-                                    <option value="complete">Complete</option>
+                                    <option value="pending" className='text-yellow-500' >Pending</option>
+                                    <option value="started" className='text-blue-500'>Started</option>
+                                    <option value="complete" className='text-green-500 '>Complete</option>
                                 </select>
                                 <button
                                     onClick={handleStatusChange}
+                                    
                                     disabled={selectedTasks.length === 0 || newStatus === ''}
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                                 >
@@ -235,7 +257,7 @@ const getStatusColor = (status) => {
         case 'backlog':
             return 'text-red-500';
         case 'complete':
-            return 'text-green-500';
+            return 'text-green-600';
         default:
             return 'text-blue-500';
     }

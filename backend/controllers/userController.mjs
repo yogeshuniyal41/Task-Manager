@@ -11,7 +11,9 @@ const userController = {
         try {
             
             const { user, password } = req.body;
+            
             const foundUser = await User.findOne({ user });
+            
             if (!foundUser) {
                 return res.status(401).json({ error: 'Invalid credentials' });
             }
@@ -28,7 +30,7 @@ const userController = {
             await refreshToken.create({token:refresh_token})
 
             // Send the token in the response
-            res.status(200).json({ success: true, access_token, refresh_token, "id":user });
+            res.status(200).json({ success: true, access_token, refresh_token, "id":user ,"name":foundUser.name });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: 'Internal server error' });
@@ -61,20 +63,20 @@ const userController = {
     },
 
 
-    async logout(req,res){
+    async logout(req, res) {
         try {
+            const { token } = req.body;
             
-            if(!token)
-                {
-                    res.status(401).error('Unauthorized');
-                }
-          await  refreshToken.findOneAndDelete({token:token});
-            res.status(200).json({msg: "logged out"})
-
+            if (!token) {
+                 res.status(401).json({ error: 'Unauthorized' });
+            }
+            await refreshToken.findOneAndDelete({ token });
+             res.status(200).json({ msg: "Logged out" , status:200});
         } catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+             res.status(500).json({ error: 'Internal server error' });
         }
     }
+    
 };
 
 export default userController;

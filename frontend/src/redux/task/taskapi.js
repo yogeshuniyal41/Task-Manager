@@ -4,7 +4,7 @@ import { apiRequest } from '../utils/utilAPI';
 import {BASE_URL } from '../baseurl'
 
 
-console.log(BASE_URL)
+
 
 // TASK APIs
 export const fetchAllTasks = async (userId) => {

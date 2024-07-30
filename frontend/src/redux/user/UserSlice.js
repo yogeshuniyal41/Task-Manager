@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { loginUser, logoutUser, signupUser } from './UserAPI';
-import { setAccessToken, setRefreshToken, removeTokens  } from '../utils/utils';
+import { setAccessToken, setRefreshToken, removeTokens, setUser, getAccessToken, setName  } from '../utils/utils';
 import { useSelector } from 'react-redux';
 
 const initialState = {
@@ -13,10 +13,13 @@ export const loginAsync = createAsyncThunk(
     'user/login',
     async (credentials, thunkAPI) => {
         try {
+            
             const data = await loginUser(credentials);
             // Store tokens in secure storage
             setAccessToken(data.access_token);
             setRefreshToken(data.refresh_token);
+            setUser(data.id)
+            setName(data.name)
             
             return data;
         } catch (error) {
@@ -50,11 +53,14 @@ export const signupAsync = createAsyncThunk(
 export const logoutAsync= createAsyncThunk('/user/logout',
     async(token,thunkAPI)=>{
         try {
+            
             const data = await logoutUser(token);
+            
             if(data.status===200)
                 {
                     removeTokens();
                 }
+           
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data || error.message);

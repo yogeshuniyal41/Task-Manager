@@ -4,6 +4,7 @@ import {BASE_URL} from '../baseurl'
 // userAPI.js
 export const loginUser = async (credentials) => {
     try {
+        
         const response = await fetch(`${BASE_URL}login`, {
             method: 'POST',
             headers: {
@@ -36,8 +37,7 @@ export const signupUser = async (userDetails) => {
        
         
         if (!response.ok && response.status===409) {
-            // let err = response.json();
-            // console.log(err)
+           
             throw new Error('User Already Exist');
         }
         const data = await response.json();
@@ -50,7 +50,7 @@ export const signupUser = async (userDetails) => {
 };
 
 export const logoutUser = async(token)=>{
-
+   
         if(!token)
             {
                 throw new Error('Unauthorized');
@@ -64,8 +64,9 @@ export const logoutUser = async(token)=>{
         },
         body: JSON.stringify(token)
     });
-
+    
     let data = response.json();
+  
     
     return data;
     } 

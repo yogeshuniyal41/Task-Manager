@@ -70,7 +70,7 @@ const refreshController = async (req, res) => {
          await refreshToken.deleteOne({ _id: oldTokenRecord._id });
         // Return the new tokens to the client
         
-        console.log("new token: ",newRefreshToken)
+       
         return res.status(200).json({
             accessToken,
             refreshToken: newRefreshToken,

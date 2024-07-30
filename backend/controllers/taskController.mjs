@@ -25,7 +25,7 @@ export const getTasks = async (req, res) => {
 
 export const addTask = async (req, res) => {
     const { taskName, taskDescription, taskDeadline, user } = req.body;
- 
+    
     try {
       const result = await User.findOne({ user }); // Assuming 'username' is the correct field to query
   
@@ -76,9 +76,9 @@ export const addTask = async (req, res) => {
         const deadline = new Date(updatedTask.deadline);
         const now = new Date();
 
-        if (deadline > now && updatedTask.status !== 'completed' && updatedTask.status !== 'started') {
+        if (deadline > now && updatedTask.status !== 'complete' && updatedTask.status !== 'started') {
             updatedTask.status = 'pending';
-        } else if (deadline < now && updatedTask.status !== 'completed') {
+        } else if (deadline < now && updatedTask.status !== 'complete') {
             updatedTask.status = 'backlog';
         }
 
