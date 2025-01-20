@@ -19,7 +19,13 @@ mongoose.connect(DB_URL)
 // app.get('/', (req, res) => {
 //     res.send('<h1>Hello</h1>');
 // });
-app.use(cors())
+const corsOptions = {
+    origin: 'https://task-manager-1-9twa.onrender.com', // Allow requests from your frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+    credentials: true, // Allow cookies and credentials
+};
+
+app.use(cors(corsOptions));
 app.use(json())
 app.use(userRouter)
 app.use(taskRouter)
