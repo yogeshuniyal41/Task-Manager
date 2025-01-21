@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import CircularProgressBar from '../components/CircularProgressBar';
 import Header from '../components/Header';
+import Clock from '../components/Clock'
 import { getUser, getName } from '../redux/utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTaskAsync } from '../redux/task/taskSlice';
@@ -26,11 +27,11 @@ const Profile = () => {
   const completedTasks = useMemo(() => tasks.filter((task) => task.status === 'complete').length, [tasks]);
 
   return (
-    <div className="bg-gradient-to-r from-blue-200 via-blue-300 to-blue-500 min-h-screen">
-      <Header />
+    <div className=" min-h-screen bg-[url('/public/new.jpg')] bg-fixed ">
+     <Header><div className='mx-5 text-5xl hover:text-blue-400'><Clock/></div></Header>
       <div className="flex flex-row flex-shrink p-5">
-        <h1 className="px-5 text-blue-500 font-bold text-2xl">User Name :{name}</h1>
-        <h1 className="px-5 text-blue-500 font-bold text-2xl">Email Id : {user}</h1>
+        <h1 className="px-5  font-bold text-2xl">User Name :{name}</h1>
+        <h1 className="px-5  font-bold text-2xl">Email Id : {user}</h1>
       </div>
 
       <div className="flex">

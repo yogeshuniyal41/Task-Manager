@@ -75,7 +75,7 @@ const CustomDropdown = ({ options }) => {
         </svg>
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 shadow-lg rounded-lg z-10">
+        <div className="absolute font-extrabold right-0 mt-2 w-48 shadow-lg rounded-lg z-10">
           {options.map((option) => (
             <div
               key={option.value}

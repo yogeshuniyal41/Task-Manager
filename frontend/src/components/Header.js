@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../redux/utils/utils';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CustomDropdown from './CustomDropDown';
+import Clock from './Clock'
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -26,8 +27,9 @@ const Header = (props) => {
   ), [location.pathname]);
 
   return (
-    <div className="h-44 max-w-full flex-shrink flex-row shadow-sm rounded-xl mx-4 shadow-black">
+    <div className="h-44 max-w-full  flex-row shadow-sm rounded-xl mx-4 shadow-black">
       <div className="mx-10 my-1 w-[450px] text-7xl inline-block">Task Manager</div>
+     
       {pendingTasks > 0 && (
         <div className="mx-5 text-3xl inline-block flex-row">
           Pending:

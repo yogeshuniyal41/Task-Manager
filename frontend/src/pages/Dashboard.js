@@ -29,7 +29,10 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="bg-gradient-to-r from-blue-200 via-blue-300 to-blue-500 min-h-screen">
+        <div className="min-h-screen bg-[url('/public/new.jpg')] bg-fixed">
+
+
+
             <Header>
                 <div className='mx-5 text-5xl hover:text-blue-400'><Clock/></div>
             </Header>
