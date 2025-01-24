@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 
 import {  userRouter,taskRouter, refreshTokenRouter } from './routes/index.mjs';
-
+const path = require('path')
 dotenv.config()
 
 const app = express();
