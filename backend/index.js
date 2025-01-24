@@ -2,6 +2,11 @@ import express, { json } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 
 import {  userRouter,taskRouter, refreshTokenRouter } from './routes/index.mjs';
 import path from 'path';
