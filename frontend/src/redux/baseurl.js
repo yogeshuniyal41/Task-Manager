@@ -1,2 +1,2 @@
-const BASE_URL = `https://task-manager-n2x2.onrender.com/`;
+const BASE_URL = ``;
 module.exports = { BASE_URL };

@@ -20,7 +20,7 @@ mongoose.connect(DB_URL)
 //     res.send('<h1>Hello</h1>');
 // });
 const corsOptions = {
-    origin: 'https://task-manager-1-9twa.onrender.com', // Allow requests from your frontend
+    origin: 'https://task-manager-n2x2.onrender.com', // Allow requests from your frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
     credentials: true, // Allow cookies and credentials
 };
@@ -30,7 +30,10 @@ app.use(json())
 app.use(userRouter)
 app.use(taskRouter)
 app.use(refreshTokenRouter)
-  
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));});
 
 // code to update status of Tasks
 // cron.schedule('* * * * *', async () => {
